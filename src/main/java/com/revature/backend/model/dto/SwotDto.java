@@ -3,6 +3,7 @@ package com.revature.backend.model.dto;
 import java.sql.Timestamp;
 
 public class SwotDto {
+
 	
 	private int id;
 	
@@ -86,5 +87,5 @@ public class SwotDto {
 		return "SwotDto [id=" + id + ", associateId=" + associateId + ", managerId=" + managerId + ", createdOn="
 				+ createdOn + ", lastModified=" + lastModified + ", description=" + description + "]";
 	}
-	
+
 }

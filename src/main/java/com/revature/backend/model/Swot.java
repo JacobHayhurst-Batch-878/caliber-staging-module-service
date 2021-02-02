@@ -14,18 +14,18 @@ public class Swot {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)	// IDENTITY was preferred to AUTO.
+  @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY was preferred to AUTO.
   private int id;
 
-  //Changed this to 'EAGER' to prevent a jackson crash
-  //TODO: is there a better solution than making this EAGER?
-  @ManyToOne(fetch = FetchType.EAGER)	//removed CascadeType.ALL, this will cause problems with deletion.
+  // Changed this to 'EAGER' to prevent a jackson crash
+  // TODO: is there a better solution than making this EAGER?
+  @ManyToOne(fetch = FetchType.EAGER) // removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "associate_id")
   private Associate associate;
 
-  //Changed this to 'EAGER' to prevent a jackson crash
-  //TODO: is there a better solution than making this EAGER?
-  @ManyToOne(fetch = FetchType.EAGER)	//removed CascadeType.ALL, this will cause problems with deletion.
+  // Changed this to 'EAGER' to prevent a jackson crash
+  // TODO: is there a better solution than making this EAGER?
+  @ManyToOne(fetch = FetchType.EAGER) // removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "created_by")
   private Manager manager;
 
@@ -36,13 +36,14 @@ public class Swot {
   private String description;
 
   @Column(name = "last_modified")
-  private Timestamp lastModified;	// TODO: this will need to be updated each time the SWOT is updated.
-  
-  @JsonManagedReference //Prevents recursion in retrieve requests
+  private Timestamp lastModified; // TODO: this will need to be updated each time the SWOT is updated.
+
+  @JsonManagedReference // Prevents recursion in retrieve requests
   @OneToMany(mappedBy = "swot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<AnalysisItem> analysisItems = new ArrayList<>();
 
-  public Swot() {}
+  public Swot() {
+  }
 
   public Swot(int id, Associate associate_id, Manager manager, Timestamp createdOn, Timestamp lastModified, String description) {
     super();
@@ -124,13 +125,13 @@ public class Swot {
   }
 
   public List<AnalysisItem> getAnalysisItems() {
-	return analysisItems;
+    return analysisItems;
   }
 
   public void setAnalysisItems(List<AnalysisItem> analysisItems) {
-	this.analysisItems = analysisItems;
+    this.analysisItems = analysisItems;
   }
-  
+
   // Set the Last Modified time to the current time.
   public void setLastModifiedNow() {
 	  this.lastModified = new Timestamp(System.currentTimeMillis());
@@ -203,6 +204,5 @@ public class Swot {
 				+ ", description=" + description + ", lastModified=" + lastModified + ", analysisItems=" + analysisItems
 				+ "]";
 	}
-  
-	
+
 }
